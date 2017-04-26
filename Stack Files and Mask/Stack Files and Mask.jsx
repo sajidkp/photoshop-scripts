@@ -44,7 +44,7 @@ function crop()
 
 //Convert to Smart Object
 function createSmartObject(layer)
-{
+{	doc.activeLayer = layer;
     var idnewPlacedLayer = stringIDToTypeID( 'newPlacedLayer' );
     executeAction(idnewPlacedLayer, undefined, DialogModes.NO);
 }
@@ -52,7 +52,8 @@ function createSmartObject(layer)
 //Rasterize Layer
 function rasterizeLayer(layer)
 {
-executeAction(stringIDToTypeID('rasterizePlaced'), undefined, DialogModes.NO);
+	doc.activeLayer = layer;
+	executeAction(stringIDToTypeID('rasterizePlaced'), undefined, DialogModes.NO);
 }
   
   function clip(){  
@@ -177,7 +178,7 @@ function getFiles(sourceFolder) {
 // importFolderAsLayers - imports a folder of images as named layers
 function importFolderAsLayers(fileArray, prefs) {
 	// create a new document
-	var newDoc = documents.add(300, 300, 72, 'Imported Layers', NewDocumentMode.RGB, DocumentFill.TRANSPARENT, 1);
+	var newDoc = documents.add(300, 300, 72, 'Masked Image', NewDocumentMode.RGB, DocumentFill.TRANSPARENT, 1);
 	var newLayer = newDoc.activeLayer;
 
 	// loop through all files in the source folder
