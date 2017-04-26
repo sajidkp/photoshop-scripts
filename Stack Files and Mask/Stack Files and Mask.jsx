@@ -178,7 +178,7 @@ function getFiles(sourceFolder) {
 // importFolderAsLayers - imports a folder of images as named layers
 function importFolderAsLayers(fileArray, prefs) {
 	// create a new document
-	var newDoc = documents.add(300, 300, 72, 'Masked Image', NewDocumentMode.RGB, DocumentFill.TRANSPARENT, 1);
+	var newDoc = documents.add(300, 300, 72, prefs.sourceFolder.name, NewDocumentMode.RGB, DocumentFill.TRANSPARENT, 1);
 	var newLayer = newDoc.activeLayer;
 
 	// loop through all files in the source folder
