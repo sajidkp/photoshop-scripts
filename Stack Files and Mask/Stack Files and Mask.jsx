@@ -13,7 +13,11 @@ layerMask();
 // Main Routine End
 function layerMask()
 {    
-    layerDown ();  
+    if (!layerDown ())
+	{
+		alert('Mask Layer Missing. Exiting Script\n(There should be an Image named "mask" in the folder)','Mask Missing');
+		return;
+	}
     for(var i = app.activeDocument.layers.length - 2 ; i >=0 ; i--)
     { 
         doc.activeLayer = app.activeDocument.layers[i];
@@ -69,7 +73,17 @@ function rasterizeLayer(layer)
     executeAction( idGrpL, desc7, DialogModes.NO );  
     }
   
-function layerDown(){  
+function layerDown(){ 
+	var maskCheck = 0;
+	for (i=0; i<app.activeDocument.layers.length; i++) {
+		if (doc.layers[i].name=="mask")
+		{
+			maskCheck = 1;
+			break;
+		}
+    }
+	if(!maskCheck)
+    return 0;
     doc.activeLayer = app.activeDocument.layers.getByName("mask");
     doc.activeLayer.move(doc.layers[doc.layers.length-1],ElementPlacement.PLACEAFTER);
     
@@ -89,6 +103,7 @@ function layerDown(){
             list1.putInteger( 3 );  
         desc2.putList( idLyrI, list1 );  
     executeAction( idslct, desc2, DialogModes.NO );  
+	return 1;
     }
 
 //Check if File is Open. Asks user if clipping need to be open on current File or open different files
