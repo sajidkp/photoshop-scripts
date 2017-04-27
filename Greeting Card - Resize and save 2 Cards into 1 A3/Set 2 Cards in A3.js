@@ -53,7 +53,8 @@ function greetingCardAlign()
             return 0;
     }
     saveFile();
-    alert("The Greeting cards have been saved successfully in GCPRINT at desktop", 'Files Saved');
+    alert("The Greeting cards have been saved successfully in GCPRINT at desktop. Closing the document", 'Files Saved.');
+	doc.close(SaveOptions.DONOTSAVECHANGES);
 }
 
 //Position at right top
@@ -226,6 +227,6 @@ pdfSaveOptions.layers = false;
 pdfSaveOptions.preserveEditing=false;
 pdfSaveOptions.jpegQuality = 10;
 doc.saveAs(pdfFile, pdfSaveOptions, true, Extension.LOWERCASE);
-//doc.close(SaveOptions.DONOTSAVECHANGES);
+
 
 }
