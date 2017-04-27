@@ -2,14 +2,23 @@
 /*******************************************
 			Main Routine
 *******************************************/
-checkOpenFile();
-
+var fileOpenStatus = 0;
 var oldPref = app.preferences.rulerUnits 
 app.preferences.rulerUnits = Units.PIXELS;  
-var doc = activeDocument;  
-var iLayer = doc.activeLayer;  
+var doc;
+var iLayer;
+checkOpenFile();
 
-layerMask();
+if(fileOpenStatus == 1)
+{
+	doc = activeDocument;  
+	iLayer = doc.activeLayer;  
+	layerMask();
+}
+else
+{
+	alert("No Files Open. Exiting Script", 'File Open Error');
+}
 // Main Routine End
 function layerMask()
 {    
@@ -118,7 +127,10 @@ function checkOpenFile(){
                 if(!(confirm ("Do you want to apply masking on exiting document ? (Press no to open different set of images)")))
                     loadStack();
                 else
+				{
+					fileOpenStatus = 1;
                     return;
+				}
 	}
 }
 
@@ -161,6 +173,7 @@ function loadFilesToStack() {
 	else {
 		alert("The selected folder doesn't contain any recognized images.", 'No Files Found', false);
 	}
+	fileOpenStatus = 1;
 }
 
 
@@ -264,7 +277,6 @@ if (isCorrectVersion()) {
 			showError(e);
 		}
 	}
-
 	// restore original ruler unit
 	preferences.rulerUnits = originalRulerUnits;
 }
