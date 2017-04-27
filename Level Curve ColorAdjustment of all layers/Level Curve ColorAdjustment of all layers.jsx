@@ -10,11 +10,13 @@ function checkOpenFile(){
 	if(app.documents.length == 0){
 		if(confirm("No open document. Do you want to open a file?"))
 			var file = File.openDialog("Choose a File:");
-		else	
+		else
+		{
 			status = 0;
 			return 0;
+		}
 		if (file)
-			open(file);
+			app.open(file);
 		else	
 		{
 			status = 0;
